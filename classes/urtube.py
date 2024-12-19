@@ -10,6 +10,9 @@ class UrTube:
         self.users = []
         self.current_user = None
 
+    # def __str__(self):
+    #     return self.videos
+
     def log_in(self, nickname, password):
         for user in self.users:
             if user.nickname == nickname.lower() and user.password == hash(password):
@@ -41,6 +44,7 @@ class UrTube:
                         print('Такой фильм есть в списке!')
                         return
                     else:
+                        print(f'Film {i} add')
                         self.videos.append(i)
                         return
             else:
@@ -54,9 +58,7 @@ class UrTube:
             if search_word.lower() in video.title.lower():
                 result.append(video)
 
-        if result:
-            for i in result:
-                print(i)
+        return result
 
     def watch_video(self, film_name):
         if self.current_user is None:
@@ -64,14 +66,17 @@ class UrTube:
             return
 
         found_video = None
+
         for video in self.videos:
-            if video.title == film_name:
+            if video == film_name:
+                print(f'Film {film_name} find')
                 found_video = video
                 break
-
-        if not found_video:
+        else:
+            print(f'Film {film_name} not find')
             return
 
+        print(self.current_user)
         if found_video.adult_mode and self.current_user.age < 18:
             print("You are under 18 years old, please leave the page")
             return
@@ -79,7 +84,7 @@ class UrTube:
         for second in range(found_video.time_now, found_video.duration):
             print(f"Просмотр на секунде: {second}")
             found_video.time_now = second + 1
-            time.sleep(0.1)
+            time.sleep(0.5)
         found_video.time_now = 0
 
 
