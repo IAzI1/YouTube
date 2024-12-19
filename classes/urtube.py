@@ -39,6 +39,10 @@ class UrTube:
                 for z in self.videos:
                     if i == z:
                         print('Такой фильм есть в списке!')
+                        return
+                    else:
+                        self.videos.append(i)
+                        return
             else:
                 print(f'Film {i} add')
                 self.videos.append(i)
@@ -79,7 +83,3 @@ class UrTube:
         found_video.time_now = 0
 
 
-ur = UrTube()
-ur.add(Video('Harry Potter', 40))
-ur.add(Video('Harry Potter', 40))
-print(ur.videos)
