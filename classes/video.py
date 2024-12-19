@@ -11,4 +11,5 @@ class Video:
     def __eq__(self, other):
         if isinstance(other, Video):
             return self.title == other.title
+        return self.title == other
 
