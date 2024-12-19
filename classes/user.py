@@ -13,6 +13,10 @@ class User:
     def password(self):
         return self.__password
 
+    @property
+    def age(self):
+        return self.__age
+
     def __str__(self):
         return self.__nickname
 
