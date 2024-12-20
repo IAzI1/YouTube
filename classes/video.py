@@ -8,6 +8,9 @@ class Video:
     def __str__(self):
         return f'{self.title}'
 
+    def __repr__(self):
+        return self.title
+
     def __eq__(self, other):
         if isinstance(other, Video):
             return self.title == other.title

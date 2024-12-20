@@ -27,13 +27,12 @@ class UrTube:
         if new_user not in self.users:
             self.users.append(new_user)
             self.current_user = new_user
-            print(f'Successful registration! \nCurrent user: {self.current_user}\n')
         else:
-            print(f'User {nickname} already exists')
+            print(f'Пользователь {new_user} уже существует')
+            return
 
     def log_out(self):
         if self.current_user:
-            print(f'{self.current_user} log out\n')
             self.current_user = None
 
     def add(self, *videos):
@@ -41,14 +40,11 @@ class UrTube:
             if self.videos:
                 for z in self.videos:
                     if i == z:
-                        print('Такой фильм есть в списке!')
                         return
                     else:
-                        print(f'Film {i} add')
                         self.videos.append(i)
                         return
             else:
-                print(f'Film {i} add')
                 self.videos.append(i)
 
 
@@ -62,29 +58,20 @@ class UrTube:
 
     def watch_video(self, film_name):
         if self.current_user is None:
-            print("Log in to watch the video")
+            print('Войдите в аккаунт, чтобы смотреть видео')
             return
-
-        found_video = None
 
         for video in self.videos:
             if video == film_name:
-                print(f'Film {film_name} find')
                 found_video = video
-                break
-        else:
-            print(f'Film {film_name} not find')
-            return
+                if found_video.adult_mode and self.current_user.age < 18:
+                    print("Вам нет 18 лет, пожалуйста покиньте страницу")
+                    return
 
-        print(self.current_user)
-        if found_video.adult_mode and self.current_user.age < 18:
-            print("You are under 18 years old, please leave the page")
-            return
-
-        for second in range(found_video.time_now, found_video.duration):
-            print(f"Просмотр на секунде: {second}")
-            found_video.time_now = second + 1
-            time.sleep(0.5)
-        found_video.time_now = 0
+                for second in range(found_video.time_now, found_video.duration):
+                    print(second + 1, end=' ')
+                    found_video.time_now = second + 1
+                    time.sleep(0.5)
+                print('Конец видео')
 
 

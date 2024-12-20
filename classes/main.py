@@ -9,9 +9,9 @@ if __name__ == '__main__':
     v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
     # Добавление видео
     ur.add(v1, v2)
-    print(*ur.videos)
-    print(*ur.get_videos('лучший'))
-    print(*ur.get_videos('ПРОГ'))
+
+    print(ur.get_videos('лучший'))
+    print(ur.get_videos('ПРОГ'))
     # # Проверка на вход пользователя и возрастное ограничение
     ur.watch_video('Для чего девушкам парень программист?')
     ur.register('vasya_pupkin', 'lolkekcheburek', 13)
